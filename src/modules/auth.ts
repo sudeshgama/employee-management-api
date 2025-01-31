@@ -1,11 +1,8 @@
 import jwt from 'jsonwebtoken';
-import { Employee } from '../models/user.model';
-import { Request, Response, NextFunction } from 'express';
+import { Employee } from '../models/employee.model';
+import { Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-
-export interface AuthenticationRequest extends Request {
-  employee: Employee;
-}
+import { AuthenticationRequest } from '../models/auth.model';
 
 export const createJwt = (employee: Employee): string => {
   const token = jwt.sign({ id: employee.id, email: employee.email }, process.env.JWT_SECRET);
