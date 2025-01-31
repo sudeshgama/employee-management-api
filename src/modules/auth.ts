@@ -3,6 +3,9 @@ import { Employee } from '../models/employee.model';
 import { Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import { AuthenticationRequest } from '../models/auth.model';
+import { sendResponse } from '../utils/helper-functions';
+import { ErrorMessages } from '../constants/error-messages';
+import { HttpStatusCode } from '../constants/status-codes';
 
 export const createJwt = (employee: Employee): string => {
   const token = jwt.sign({ id: employee.id, email: employee.email }, process.env.JWT_SECRET);
@@ -14,16 +17,14 @@ export const protect = (req: AuthenticationRequest, res: Response, next: NextFun
 
   // if no bearer token return
   if (!bearer) {
-    res.status(401);
-    res.send({ message: 'Not Authorized' });
+    sendResponse(res, ErrorMessages.UNAUTHORIZED, HttpStatusCode.UNAUTHORIZED);
     return;
   }
 
   // if no token in the bearer return
   const [, token] = bearer.split(' ');
   if (!token) {
-    res.status(401);
-    res.send({ message: 'Not a valid token' });
+    sendResponse(res, ErrorMessages.INVALID_TOKEN, HttpStatusCode.UNAUTHORIZED);
     return;
   }
 
@@ -34,8 +35,7 @@ export const protect = (req: AuthenticationRequest, res: Response, next: NextFun
     next();
     return;
   } catch (e) {
-    res.status(401);
-    res.send({ message: 'Not a valid token' });
+    sendResponse(res, ErrorMessages.INVALID_TOKEN, HttpStatusCode.UNAUTHORIZED);
     return;
   }
 }
