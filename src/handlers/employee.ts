@@ -2,12 +2,15 @@ import { NextFunction, Response } from "express";
 import prisma from "../db";
 import { AuthenticationRequest } from "../models/auth.model";
 import { comparePasswords, createJwt, hashPassword } from "../modules/auth";
+import { HttpStatusCode } from "../constants/status-codes";
+import { ErrorMessages } from "../constants/error-messages";
+import { SuccessMessages } from "../constants/succes-messages";
+import { sendResponse } from "../utils/helper-functions";
 
 export const createEmployee = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
   try {
     if (Object.entries(req.body).length === 0) {
-      res.status(400);
-      res.send({ message: 'Bad Request' });
+      sendResponse(res, ErrorMessages.MISSING_PROPERTY, HttpStatusCode.BAD_REQUEST);
       return;
     }
 
@@ -16,8 +19,7 @@ export const createEmployee = async (req: AuthenticationRequest, res: Response, 
       req.body.password === undefined ||
       req.body.role === undefined
     ) {
-      res.status(400);
-      res.send({ message: 'Bad Request One or more property missing in the payload' });
+      sendResponse(res, ErrorMessages.MISSING_PROPERTY, HttpStatusCode.BAD_REQUEST);
       return;
     }
 
@@ -30,7 +32,7 @@ export const createEmployee = async (req: AuthenticationRequest, res: Response, 
       }
     })
     const token = createJwt(employee);
-    res.json({ message: 'You have signed up successfully' });
+    res.json({ message: SuccessMessages.SIGNUP_SUCCESS });
   } catch (e) {
     next(e);
   }
@@ -40,8 +42,7 @@ export const signIn = async (req: AuthenticationRequest, res: Response, next: Ne
   try {
 
     if (Object.entries(req.body).length === 0 || Object.entries(req.body).length > 2) {
-      res.status(400);
-      res.send({ message: 'Bad Request' });
+      sendResponse(res, ErrorMessages.INVALID_USER, HttpStatusCode.BAD_REQUEST);
       return;
     }
 
@@ -49,11 +50,15 @@ export const signIn = async (req: AuthenticationRequest, res: Response, next: Ne
       where: { email: req.body.email }
     });
 
-    const isValid = comparePasswords(req.body.password, employee.password);
+    if (!employee) {
+      sendResponse(res, ErrorMessages.INVALID_USER, HttpStatusCode.BAD_REQUEST);
+      return;
+    }
+
+    const isValid = await comparePasswords(req.body.password, employee.password);
 
     if (!isValid) {
-      res.status(401);
-      res.send("Invalid username or Password");
+      sendResponse(res, ErrorMessages.INVALID_USER, HttpStatusCode.BAD_REQUEST);
       return;
     }
 
@@ -63,3 +68,4 @@ export const signIn = async (req: AuthenticationRequest, res: Response, next: Ne
     next(e)
   }
 }
+
