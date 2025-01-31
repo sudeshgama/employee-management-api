@@ -1,10 +1,14 @@
 import express from "express";
+import morgan from 'morgan';
+import router from "./router";
+import { protect } from "./modules/auth";
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.status(200);
-  res.json({ message: 'hello from server' });
-})
+// middleware
+app.use(morgan('dev'));
+
+// protect will protect all the routes from being accessed from outside
+app.use('/api', protect, router)
 
 export default app;

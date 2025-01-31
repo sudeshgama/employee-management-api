@@ -3,7 +3,9 @@ import { Router } from "express";
 const router: Router = Router();
 
 // add employee
-router.post('/employees', (res, req, next) => { });
+router.post('/employees', (req, res, next) => {
+  res.json({ message: 'hello from employees' })
+});
 // remove employee
 router.delete('/employees/:id', (res, req, next) => { });
 // update employee
@@ -22,3 +24,5 @@ router.delete('/tasks/:id', (res, req, next) => { });
 router.put('/tasks/:id', (res, req, next) => { });
 // get all tasks
 router.get('/tasks', (res, req, next) => { });
+
+export default router;
