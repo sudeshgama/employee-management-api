@@ -1,4 +1,4 @@
-import { Employee } from "./user.model";
+import { Employee } from "./employee.model";
 
 export interface Task {
   id: string; // UUID for the task
