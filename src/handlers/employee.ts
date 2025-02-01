@@ -4,8 +4,9 @@ import { AuthenticationRequest } from "../models/auth.model";
 import { comparePasswords, createJwt, hashPassword } from "../modules/auth";
 import { HttpStatusCode } from "../constants/status-codes";
 import { ErrorMessages } from "../constants/error-messages";
-import { SuccessMessages } from "../constants/succes-messages";
 import { sendResponse } from "../utils/helper-functions";
+import { validationResult } from "express-validator";
+import { SuccessMessages } from "../constants/success-messages";
 
 export const createEmployee = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
   try {
@@ -40,11 +41,16 @@ export const createEmployee = async (req: AuthenticationRequest, res: Response, 
 
 export const signIn = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
   try {
+    const errors = validationResult(req);
 
-    if (Object.entries(req.body).length === 0 || Object.entries(req.body).length > 2) {
-      sendResponse(res, ErrorMessages.INVALID_USER, HttpStatusCode.BAD_REQUEST);
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        success: false,
+        errors: errors.array(),
+      });
       return;
     }
+
 
     const employee = await prisma.employee.findUnique({
       where: { email: req.body.email }
@@ -63,7 +69,27 @@ export const signIn = async (req: AuthenticationRequest, res: Response, next: Ne
     }
 
     const token = createJwt(employee);
-    res.json({ token: token, email: employee.email, role: employee.role });
+
+    res.json({
+      token,
+      email: employee.email,
+      role: employee.role
+    });
+
+  } catch (e) {
+    next(e)
+  }
+}
+
+export const getAllEmployees = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
+  try {
+    const employees = await prisma.employee.findMany({
+      select: {
+        name: true,
+        email: true
+      }
+    });
+    res.json({ data: employees })
   } catch (e) {
     next(e)
   }
