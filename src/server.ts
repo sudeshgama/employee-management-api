@@ -4,6 +4,7 @@ import router from "./router";
 import { protect } from "./modules/auth";
 import { createEmployee, signIn } from "./handlers/employee";
 import { validateSignIn } from "./middleware/signin-validations";
+import { validateCreateEmployee } from "./middleware/create-employee-validations";
 const cors = require('cors');
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(cors({
 app.use('/api', protect, router);
 
 // create employee 
-app.post('/employee', createEmployee);
+app.post('/employee', validateCreateEmployee, createEmployee);
 app.post('/signIn', validateSignIn, signIn)
 
 export default app;
