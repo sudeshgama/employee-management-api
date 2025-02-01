@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import router from "./router";
 import { protect } from "./modules/auth";
 import { createEmployee, signIn } from "./handlers/employee";
+import { validateSignIn } from "./middleware/signin-validations";
 const cors = require('cors');
 
 const app = express();
@@ -25,6 +26,6 @@ app.use('/api', protect, router);
 
 // create employee 
 app.post('/employee', createEmployee);
-app.post('/signIn', signIn)
+app.post('/signIn', validateSignIn, signIn)
 
 export default app;
