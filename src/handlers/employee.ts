@@ -10,29 +10,27 @@ import { SuccessMessages } from "../constants/success-messages";
 
 export const createEmployee = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
   try {
-    if (Object.entries(req.body).length === 0) {
-      sendResponse(res, ErrorMessages.MISSING_PROPERTY, HttpStatusCode.BAD_REQUEST);
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.status(HttpStatusCode.BAD_REQUEST).json({
+        success: false,
+        errors: errors.array(),
+      });
       return;
     }
 
-    if (req.body.name === undefined ||
-      req.body.email === undefined ||
-      req.body.password === undefined ||
-      req.body.role === undefined
-    ) {
-      sendResponse(res, ErrorMessages.MISSING_PROPERTY, HttpStatusCode.BAD_REQUEST);
-      return;
-    }
-
-    const employee = await prisma.employee.create({
+    await prisma.employee.create({
       data: {
         name: req.body.name,
         email: req.body.email,
         password: await hashPassword(req.body.password),
-        role: req.body.role
+        role: req.body.role,
+        department: req.body.department,
+        position: req.body.position,
+        phone: req.body.phone
       }
     })
-    const token = createJwt(employee);
     res.json({ message: SuccessMessages.SIGNUP_SUCCESS });
   } catch (e) {
     next(e);
@@ -44,7 +42,7 @@ export const signIn = async (req: AuthenticationRequest, res: Response, next: Ne
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.status(400).json({
+      res.status(HttpStatusCode.BAD_REQUEST).json({
         success: false,
         errors: errors.array(),
       });
@@ -85,8 +83,12 @@ export const getAllEmployees = async (req: AuthenticationRequest, res: Response,
   try {
     const employees = await prisma.employee.findMany({
       select: {
+        id: true,
         name: true,
-        email: true
+        email: true,
+        position: true,
+        department: true,
+        phone: true
       }
     });
     res.json({ data: employees })
