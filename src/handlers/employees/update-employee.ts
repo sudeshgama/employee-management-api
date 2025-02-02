@@ -16,14 +16,10 @@ export const updateEmployee = async (req: AuthenticationRequest, res: Response, 
         department: req.body.department
       }
     });
-    console.log(employee, 'emp');
+    const { name, department, email, phone } = employee;
     res.json({
-      data: {
-        name: employee.name,
-        department: employee.department,
-        email: employee.email,
-        phone: employee.phone
-      }, message: SuccessMessages.UPDATE_SUCCESS
+      data: { name, department, email, phone },
+      message: SuccessMessages.UPDATE_SUCCESS
     })
   } catch (e) {
     next(e);
