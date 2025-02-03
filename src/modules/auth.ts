@@ -8,7 +8,7 @@ import { ErrorMessages } from '../constants/error-messages';
 import { HttpStatusCode } from '../constants/status-codes';
 
 export const createJwt = (employee: Employee): string => {
-  const token = jwt.sign({ id: employee.id, email: employee.email }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: employee.id, email: employee.email, role: employee.role }, process.env.JWT_SECRET);
   return token;
 }
 
