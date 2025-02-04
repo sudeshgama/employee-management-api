@@ -9,8 +9,6 @@ import { EmployeeRoles } from "../../constants/employee-roles";
 
 export const updateEmployee = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
   try {
-
-    console.log(req.employee.role);
     //check if user is admin if not return unauthorized
     if (req.employee.role !== EmployeeRoles.ADMIN) {
       sendResponse(res, ErrorMessages.UNAUTHORIZED, HttpStatusCode.FORBIDDEN);

@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { getAllEmployees } from "./handlers/employees/get-all-employees";
 import { updateEmployee } from "./handlers/employees/update-employee";
+import { deleteEmployee } from "./handlers/employees/delete-employee";
 
 const router: Router = Router();
 
 // remove employee
-router.delete('/employees/:id', (res, req, next) => { });
+router.delete('/employees/:id', deleteEmployee);
 // update employee
 router.put('/employees/:id', updateEmployee);
 // get all employees
