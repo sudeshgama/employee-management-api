@@ -11,7 +11,8 @@ export const getAllEmployees = async (req: AuthenticationRequest, res: Response,
         email: true,
         position: true,
         department: true,
-        phone: true
+        phone: true,
+        role: true
       }
     });
     res.json({ data: employees })
