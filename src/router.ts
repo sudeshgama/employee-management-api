@@ -2,6 +2,8 @@ import { Router } from "express";
 import { getAllEmployees } from "./handlers/employees/get-all-employees";
 import { updateEmployee } from "./handlers/employees/update-employee";
 import { deleteEmployee } from "./handlers/employees/delete-employee";
+import { getAllTasks } from "./handlers/task/get-all-tasks";
+import { createTask } from "./handlers/task/create-task";
 
 const router: Router = Router();
 
@@ -11,17 +13,14 @@ router.delete('/employees/:id', deleteEmployee);
 router.put('/employees/:id', updateEmployee);
 // get all employees
 router.get('/employees', getAllEmployees);
-//login
-router.post('/auth/login', (res, req, next) => { });
-
 
 // add tasks
-router.post('/tasks', (res, req, next) => { });
+router.get('/tasks/:id', getAllTasks);
 // remove tasks
 router.delete('/tasks/:id', (res, req, next) => { });
 // update tasks
 router.put('/tasks/:id', (res, req, next) => { });
 // get all tasks
-router.get('/tasks', (res, req, next) => { });
+router.post('/task/:id', createTask);
 
 export default router;
