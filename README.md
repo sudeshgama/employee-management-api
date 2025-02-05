@@ -1,6 +1,6 @@
 # Employee Management API
 
-The Employee Management API is a RESTful API built with **NestJS** and **Prisma** to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
+The Employee Management API is a RESTful API built with **NodeJs**, **ExpressJs** and **Prisma** to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
 
 ## Features
 
@@ -25,11 +25,10 @@ The Employee Management API is a RESTful API built with **NestJS** and **Prisma*
 
 ## Technologies Used
 
-- **NestJS**: A progressive Node.js framework for building efficient and scalable server-side applications.
+- **ExpressJs**: A Node.js framework for building efficient and scalable server-side applications.
 - **Prisma**: A modern ORM for database access and management.
 - **PostgreSQL**: A powerful, open-source relational database system.
 - **TypeScript**: A typed superset of JavaScript for better developer productivity.
-- **Swagger**: API documentation and testing.
 
 ---
 
@@ -45,45 +44,53 @@ The Employee Management API is a RESTful API built with **NestJS** and **Prisma*
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/sudeshgama/employee-management-api.git
    cd employee-management-api
    ```
 
-bash
-Copy
-git clone https://github.com/sudeshgama/employee-management-api.git
-cd employee-management-api
-Install dependencies:
+   ```
+   bash
+   Copy
+   git clone https://github.com/sudeshgama/employee-management-api.git
+   cd employee-management-api
+   ```
 
-bash
-Copy
-npm install
-Set up the database:
+2. **Install dependencies:**
 
-Create a PostgreSQL database.
+   ````bash
+   Copy
+   npm install```
 
-Update the .env file with your database credentials:
+   ````
 
-env
-Copy
-DATABASE_URL="postgresql://user:password@localhost:5432/employee_management"
-Run Prisma migrations:
+3. **Set up the database:**
 
-bash
-Copy
-npx prisma migrate dev --name init
-Seed the database (optional):
+- Create a PostgreSQL database.
 
-bash
-Copy
-npx prisma db seed
-Start the server:
+- Update the .env file with your database credentials:
 
-bash
-Copy
-npm run start:dev
-The API will be available at http://localhost:3000.
+  ```env
+  Copy
+  DATABASE_URL="postgresql://user:password@localhost:5432/employee_management"``
+  ```
+
+4. **Run Prisma migrations:**
+
+   ````bash
+   Copy
+   npx prisma migrate dev --name init```
+
+   ````
+
+5. **Start the server:**
+
+   ````bash
+   Copy
+   npm run start:dev
+   The API will be available at http://localhost:3000.```
+   ````
 
 API Documentation
 The API documentation is automatically generated using Swagger. After starting the server, you can access the documentation at:
@@ -165,12 +172,3 @@ NestJS for providing a robust framework for building APIs.
 Prisma for simplifying database access and management.
 
 PostgreSQL for being a reliable and scalable database solution.
-
-Contact
-For questions or feedback, please contact:
-
-Sudesh Gama
-
-GitHub: sudeshgama
-
-Email: sudeshgama@example.com
