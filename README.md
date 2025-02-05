@@ -1,4 +1,4 @@
-Employee Management API
+# Employee Management API
 License
 
 The Employee Management API is a RESTful API built with NestJS and Prisma to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
