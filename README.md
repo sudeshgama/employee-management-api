@@ -1,56 +1,54 @@
 # Employee Management API
 
-# License
+The Employee Management API is a RESTful API built with **NestJS** and **Prisma** to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
 
-## The Employee Management API is a RESTful API built with NestJS and Prisma to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
+## Features
 
-# Features
+### Employee Management:
 
-# Employee Management:
+- Create, read, update, and delete employees.
+- Assign tasks to employees.
 
-# Create, read, update, and delete employees.
+### Task Management:
 
-Assign tasks to employees.
+- Create, read, update, and delete tasks.
+- Filter tasks by employee ID.
 
-Task Management:
+### Database:
 
-Create, read, update, and delete tasks.
+- Uses **Prisma** as the ORM for database operations.
+- Supports **PostgreSQL** (or any other database supported by Prisma).
 
-Filter tasks by employee ID.
+### RESTful API:
 
-Database:
+- Follows REST principles for clean and predictable endpoints.
 
-Uses Prisma as the ORM for database operations.
+## Technologies Used
 
-Supports PostgreSQL (or any other database supported by Prisma).
+- **NestJS**: A progressive Node.js framework for building efficient and scalable server-side applications.
+- **Prisma**: A modern ORM for database access and management.
+- **PostgreSQL**: A powerful, open-source relational database system.
+- **TypeScript**: A typed superset of JavaScript for better developer productivity.
+- **Swagger**: API documentation and testing.
 
-RESTful API:
+---
 
-Follows REST principles for clean and predictable endpoints.
+## Getting Started
 
-Technologies Used
-NestJS: A progressive Node.js framework for building efficient and scalable server-side applications.
+### Prerequisites
 
-Prisma: A modern ORM for database access and management.
+- Node.js (v16 or higher)
+- npm or yarn
+- PostgreSQL (or any other database supported by Prisma)
+- Git
 
-PostgreSQL: A powerful, open-source relational database system.
+### Installation
 
-TypeScript: A typed superset of JavaScript for better developer productivity.
-
-Swagger: API documentation and testing.
-
-Getting Started
-Prerequisites
-Node.js (v16 or higher)
-
-npm or yarn
-
-PostgreSQL (or any other database supported by Prisma)
-
-Git
-
-Installation
-Clone the repository:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/sudeshgama/employee-management-api.git
+   cd employee-management-api
+   ```
 
 bash
 Copy
