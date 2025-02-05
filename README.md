@@ -1,12 +1,14 @@
 # Employee Management API
-License
 
-The Employee Management API is a RESTful API built with NestJS and Prisma to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
+# License
 
-Features
-Employee Management:
+## The Employee Management API is a RESTful API built with NestJS and Prisma to manage employees and their tasks. It provides endpoints for creating, reading, updating, and deleting employees and tasks, as well as querying tasks assigned to specific employees.
 
-Create, read, update, and delete employees.
+# Features
+
+# Employee Management:
+
+# Create, read, update, and delete employees.
 
 Assign tasks to employees.
 
@@ -117,26 +119,26 @@ GET /tasks/employee/:employeeId : Get all tasks for a specific employee.
 
 Database Schema
 Employee
-Field	Type	Description
-id	String	Unique identifier (UUID).
-name	String	Employee's full name.
-createdAt	DateTime	Timestamp of creation.
-updatedAt	DateTime	Timestamp of last update.
+Field Type Description
+id String Unique identifier (UUID).
+name String Employee's full name.
+createdAt DateTime Timestamp of creation.
+updatedAt DateTime Timestamp of last update.
 Task
-Field	Type	Description
-id	String	Unique identifier (UUID).
-title	String	Task title.
-description	String?	Task description (optional).
-status	String	Task status (e.g., "pending", "completed").
-createdAt	DateTime	Timestamp of creation.
-updatedAt	DateTime	Timestamp of last update.
-employeeId	String	ID of the employee assigned to the task.
+Field Type Description
+id String Unique identifier (UUID).
+title String Task title.
+description String? Task description (optional).
+status String Task status (e.g., "pending", "completed").
+createdAt DateTime Timestamp of creation.
+updatedAt DateTime Timestamp of last update.
+employeeId String ID of the employee assigned to the task.
 Environment Variables
 The following environment variables are required:
 
-Variable	Description	Example
-DATABASE_URL	Connection URL for the database.	postgresql://user:password@localhost:5432/employee_management
-PORT	Port on which the server will run.	3000
+Variable Description Example
+DATABASE_URL Connection URL for the database. postgresql://user:password@localhost:5432/employee_management
+PORT Port on which the server will run. 3000
 Running Tests
 To run the unit tests, use the following command:
 
@@ -174,4 +176,3 @@ Sudesh Gama
 GitHub: sudeshgama
 
 Email: sudeshgama@example.com
-
