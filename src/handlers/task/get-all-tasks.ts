@@ -9,7 +9,7 @@ export const getAllTasks = async (req: AuthenticationRequest, res: Response, nex
   try {
     const employee = await prisma.employee.findUnique({
       where: {
-        id: req.params.id
+        id: req.employee.id
       }
     });
 
@@ -25,9 +25,7 @@ export const getAllTasks = async (req: AuthenticationRequest, res: Response, nex
     });
 
     res.json({
-      data: {
-        tasks
-      }
+      data: tasks
     })
   } catch (e) {
     next(e)

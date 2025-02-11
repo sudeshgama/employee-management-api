@@ -5,32 +5,35 @@ import { sendResponse } from "../../utils/helper-functions";
 import { ErrorMessages } from "../../constants/error-messages";
 import { HttpStatusCode } from "../../constants/status-codes";
 
-export const createTask = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
+export const updateTask = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
   try {
-    const employee = await prisma.employee.findUnique({
+
+    const task = await prisma.task.findUnique({
       where: {
-        id: req.employee.id
+        id: req.params.id
       }
     });
 
-    if (!employee) {
+    if (!task) {
       sendResponse(res, ErrorMessages.INVALID_TOKEN, HttpStatusCode.FORBIDDEN);
       return;
     }
 
-    const task = await prisma.task.create({
+    const updatedTask = await prisma.task.update({
+      where: {
+        id: req.params.id
+      },
       data: {
-        description: req.body.description,
-        title: req.body.title,
         status: req.body.status,
-        employeeId: req.employee.id
+        title: req.body.title,
+        description: req.body.description
       }
     });
 
     res.json({
-      data: task,
-      message: 'Task create successfully'
-    });
+      data: updatedTask,
+      message: 'Task Updated Successfully'
+    })
   } catch (e) {
     next(e);
   }

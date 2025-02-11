@@ -166,9 +166,12 @@ Open a pull request.
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Acknowledgments
-NestJS for providing a robust framework for building APIs.
+Acknowledgments.
 
 Prisma for simplifying database access and management.
 
 PostgreSQL for being a reliable and scalable database solution.
+
+# run Prisma studio locally
+
+npx prisma studio
