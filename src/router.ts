@@ -5,6 +5,7 @@ import { deleteEmployee } from "./handlers/employees/delete-employee";
 import { getAllTasks } from "./handlers/task/get-all-tasks";
 import { createTask } from "./handlers/task/create-task";
 import { updateTask } from "./handlers/task/update-task";
+import { deleteTask } from "./handlers/task/delete-task";
 
 const router: Router = Router();
 
@@ -18,7 +19,7 @@ router.get('/employees', getAllEmployees);
 // add tasks
 router.get('/tasks', getAllTasks);
 // remove tasks
-router.delete('/tasks/:id', (res, req, next) => { });
+router.delete('/tasks/:id', deleteTask);
 // update tasks
 router.put('/tasks/:id', updateTask);
 // get all tasks
